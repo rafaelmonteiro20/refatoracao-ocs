@@ -7,3 +7,4 @@ target/
 ._.DS_Store
 .project
 .classpath
+.gitkeep
