@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
-public class CDRGeneratorFile implements CDRGenerator {
+public class CDRGeneratorFile implements CDRGenerator, CDRFileLocator {
 
 	private String pastaCdr;
 	
@@ -24,7 +24,8 @@ public class CDRGeneratorFile implements CDRGenerator {
 		}
 	}
 	
-	private File getFile(String numero) {
+	@Override
+	public File getFile(String numero) {
 		return new File(pastaCdr + File.pathSeparator + numero);
 	}
 	

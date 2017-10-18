@@ -6,14 +6,17 @@ import com.algaworks.ocs.log.LoggerOCS;
 import com.algaworks.ocs.model.Cliente;
 import com.algaworks.ocs.repository.Clientes;
 
-public abstract class OcsApi {
+public class OcsApi {
 
 	private LoggerOCS logger;
 	private Clientes clientes;
+	private CDRGenerator cdrGenerator;
 
-	public OcsApi() {
+	public OcsApi(CDRGenerator cdrGenerator) {
 		this.logger = new ApiLogger();
 		this.clientes = new Clientes();
+		
+		this.cdrGenerator = cdrGenerator;
 	}
 
 	public Ligacao autorizar(String numero) {
@@ -51,9 +54,7 @@ public abstract class OcsApi {
 		clientes.salvar(cliente);
 		logger.ligacaoFinalizada(numero, valorLigacao);
 		
-		getCdrGenerator().gerar(numero, tempo, valorLigacao);
+		cdrGenerator.gerar(numero, tempo, valorLigacao);
 	}
-	
-	protected abstract CDRGenerator getCdrGenerator();
 	
 }
