@@ -6,8 +6,15 @@ public class Ligacao {
 	private double tempo;
 
 	public Ligacao(boolean autorizada, double tempo) {
+		if(tempo <= 0)
+			throw new IllegalArgumentException("Tempo não permitido.");
+		
 		this.autorizada = autorizada;
 		this.tempo = tempo;
+	}
+
+	public static Ligacao criarLigacaoNaoAutorizada() {
+		return new Ligacao(false, 0.0);
 	}
 
 	public boolean isAutorizada() {
