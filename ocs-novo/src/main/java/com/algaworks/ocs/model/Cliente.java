@@ -50,8 +50,11 @@ public class Cliente implements Serializable {
 		return saldo;
 	}
 
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
+	public void atualizarSaldo(double valor) {
+		if(valor < 0)
+			throw new IllegalArgumentException();
+		
+		this.saldo -= valor;
 	}
 
 	public Tarifa getTarifa() {

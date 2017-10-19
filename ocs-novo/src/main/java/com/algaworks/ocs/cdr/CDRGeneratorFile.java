@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
+import com.algaworks.ocs.model.Cliente;
+
 public class CDRGeneratorFile implements CDRGenerator, CDRFileLocator {
 
 	private String pastaCdr;
@@ -27,6 +29,11 @@ public class CDRGeneratorFile implements CDRGenerator, CDRFileLocator {
 	@Override
 	public File getFile(String numero) {
 		return new File(pastaCdr + File.pathSeparator + numero);
+	}
+
+	@Override
+	public void finalizar(Cliente cliente, double tempo) {
+		gerar(cliente.getNumero(), tempo, cliente.getTarifa().calcularValorLigacao(tempo));
 	}
 	
 }
